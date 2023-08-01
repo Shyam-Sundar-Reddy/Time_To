@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Total Seconds Calculation</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #container {
+            text-align: center;
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        span {
+            font-size: 24px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #remainingSeconds {
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>⏳ Time Remaining in your life ready to 💀 </h1>
+         
+        <span id="remainingSeconds">Loading...</span>
+    </div>
+
+    <script>
+        // Function to calculate remaining seconds
+        function calculateRemainingSeconds() {
+            const fixedTotalSeconds = 65593566400;
+            const currentTime = new Date();
+            const totalSecondsFromYearOne = Math.floor((currentTime - new Date(1, 0, 1)) / 1000);
+            const remainingSeconds = fixedTotalSeconds - totalSecondsFromYearOne;
+            return remainingSeconds;
+        }
+
+        // Function to display the results on the page
+        function displayResults(remainingSeconds) {
+            document.getElementById('remainingSeconds').textContent = remainingSeconds.toLocaleString();
+        }
+
+        // Function to update the remaining seconds dynamically
+        function updateRemainingSeconds() {
+            const remainingSeconds = calculateRemainingSeconds();
+            displayResults(remainingSeconds);
+        }
+
+        // Call the updateRemainingSeconds function every second (1000 milliseconds)
+        setInterval(updateRemainingSeconds, 1000);
+
+        // Call the updateRemainingSeconds function when the page loads to display the initial data
+        updateRemainingSeconds();
+    </script>
+</body>
+</html>
