@@ -1,77 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Total Seconds Calculation</title>
+    <title>⏳ Your Life Timer</title>
     <style>
         body {
             background-color: #121212;
-            color: #e0e0e0;
-            font-family: Arial, sans-serif;
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            text-align: center;
         }
 
         #container {
-            text-align: center;
-            padding: 20px;
-            background-color: #2a2a2a;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background-color: #1e1e1e;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.7);
+            max-width: 500px;
         }
 
         h1 {
             margin-bottom: 20px;
-        }
-
-        span {
-            font-size: 24px;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 10px;
+            font-size: 28px;
         }
 
         #remainingSeconds {
+            font-size: 36px;
+            font-weight: bold;
             color: #ffcc00;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #c0c0c0;
         }
     </style>
 </head>
 <body>
     <div id="container">
-        <h1>⏳ Time Remaining in your life ready to 💀 </h1>
-         
+        <h1>⏳ Time Remaining in Your Life</h1>
         <span id="remainingSeconds">Loading...</span>
+        <p>Life is precious. Every second counts.  
+           Be happy, explore, create, and love —  
+           whoever you are, in the future, make it count! 💛</p>
     </div>
 
     <script>
-        // Function to calculate remaining seconds
+        // Total seconds you "estimate" for life
+        const fixedTotalSeconds = 65593566400; // ~2080 years (just an example, can adjust)
+
+        // Calculate remaining seconds
         function calculateRemainingSeconds() {
-            const fixedTotalSeconds = 65593566400;
             const currentTime = new Date();
-            const totalSecondsFromYearOne = Math.floor((currentTime - new Date(1, 0, 1)) / 1000);
+            const totalSecondsFromYearOne = Math.floor((currentTime - new Date(1,0,1)) / 1000);
             const remainingSeconds = fixedTotalSeconds - totalSecondsFromYearOne;
-            return remainingSeconds;
+            return remainingSeconds > 0 ? remainingSeconds : 0;
         }
 
-        // Function to display the results on the page
-        function displayResults(remainingSeconds) {
-            document.getElementById('remainingSeconds').textContent = remainingSeconds.toLocaleString();
+        // Display formatted number
+        function displayResults(seconds) {
+            document.getElementById('remainingSeconds').textContent = seconds.toLocaleString();
         }
 
-        // Function to update the remaining seconds dynamically
+        // Update every second
         function updateRemainingSeconds() {
-            const remainingSeconds = calculateRemainingSeconds();
-            displayResults(remainingSeconds);
+            const remaining = calculateRemainingSeconds();
+            displayResults(remaining);
         }
 
-        // Call the updateRemainingSeconds function every second (1000 milliseconds)
-        setInterval(updateRemainingSeconds, 1000);
-
-        // Call the updateRemainingSeconds function when the page loads to display the initial data
+        // Initial call and interval
         updateRemainingSeconds();
+        setInterval(updateRemainingSeconds, 1000);
     </script>
 </body>
 </html>
